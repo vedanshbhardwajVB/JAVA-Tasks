@@ -1,7 +1,11 @@
+import java.util.Scanner;
+
 public class MultiLevelDemo {
 	public static void main (String [] args) {
-		Narzo twentyA = new Narzo(8,32, true,9);
-		System.out.println(twentyA.calculatePrice());
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the mobile's ram space 5Gcompatibility and AndroidVersion space separated");
+		Narzo twentyA = new Narzo(sc.nextInt(),sc.nextInt(), sc.nextBoolean(),sc.nextInt());
+		System.out.println("The price is "+twentyA.calculatePrice());
 	}
 }
 
@@ -11,9 +15,9 @@ int space;
 boolean isFiveG;
 
 Mobile (int ram, int space, boolean b){
-	ram=ram;
-	space = space;
-	isFiveG=b;
+	this.ram=ram;
+	this.space = space;
+	this.isFiveG=b;
 	System.out.println("Inside MOBILE class");
 }
 }
@@ -23,7 +27,7 @@ int androidVersion;
 
 Realme (int ram, int space, boolean b, int version){
 	super(ram, space, b);
-	androidVersion = version;
+	this.androidVersion = version;
 	System.out.println("Inside REALME class");
 }
 }
@@ -35,7 +39,7 @@ super(ram, space,b, version);
 }
 
 	public int calculatePrice(){
-		//System.out.println("android version is "+androidVersion);
+
 		if(androidVersion >=9 && isFiveG)
 			return 10000;
 		return (ram*1000 + space*100);
