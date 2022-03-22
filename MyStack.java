@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
-
+class CustomException extends Exception {
+	public CustomException (String s){
+		super(s);
+	}
+}
+ 
 public class MyStack{
 private int stackSize;
 private int[] stackArray;
@@ -47,12 +52,6 @@ public boolean isStackFull() {
     return (top >= stackSize - 1);
 }
 
-class CustomException extends Exception {
-	public CustomException (String s){
-		super(s);
-	}
-}
- 
 public static void main(String args[]){
 	Scanner sc = new Scanner(System.in);
 	System.out.println("Enter the stack size");
