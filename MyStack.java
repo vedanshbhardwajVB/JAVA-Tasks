@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 
 public class MyStack{
@@ -12,18 +12,23 @@ private int top;
     this.top = -1;
 }
  
-public void push(int entry) throws Exception {
+public void push(int entry) throws CustomException {
     if(this.isStackFull()){
-    	System.out.println("Stack Overflow");
+    	//System.out.println("Stack Overflow");
+	throw new CustomException("No space to push, STACK OVERFLOW !!");
 	}
-else
-stackArray[++top]=entry;
+else{
+	stackArray[++top]=entry;
+	System.out.println("Entered entry: "+entry);
+}
+
 }
  
-public int pop() throws Exception {
+public int pop() throws CustomException {
     if(this.isStackEmpty()){
-    	System.out.println("Stack underflow.");
-return -1;
+    	//System.out.println("Stack underflow.");
+	throw new CustomException("No element to pop, STACK UNDERFLOW !!");
+	
 	}
 	int entry = this.stackArray[top--];
 	System.out.println("Removed entry: "+entry);
@@ -41,17 +46,45 @@ public boolean isStackEmpty() {
 public boolean isStackFull() {
     return (top >= stackSize - 1);
 }
+
+class CustomException extends Exception {
+	public CustomException (String s){
+		super(s);
+	}
+}
  
 public static void main(String args[]){
-	MyStack stack = new MyStack(3);
+	Scanner sc = new Scanner(System.in);
+	System.out.println("Enter the stack size");
+	int n = sc.nextInt();
+	MyStack stack = new MyStack(n);
 	try {
-		for(int i=1;i<10;i++){
-		    stack.push(i);
+	boolean cont=true;
+	while(cont){
+	System.out.println("Press 1 for PUSHING, 2 for POPPING");
+	int choice = sc.nextInt();
+	if(choice == 1){
+		System.out.println("How many elements do you want to push in the stack ?");
+		int count = sc.nextInt();
+		System.out.println("Start entering, one number in a line....");
+		for(int i=0; i<count ;i++){
+			stack.push(sc.nextInt());
+			}
 		}
-		for(int i=1;i<5;i++){
-			 stack.pop();
+	else {
+		System.out.println("How many elements do you want to pop from the stack ?");
+		int count = sc.nextInt();
+		while (count >0){
+			stack.pop();
+			count--;
+			}
 		}
-	} catch (Exception e) {
+	
+	System.out.println("Want to continue ?? 1 for YES, 2 for NO ");
+	cont=sc.nextInt()==1? true: false;
+	}
+
+	} catch (CustomException e) {
 		e.printStackTrace();
 	}
 }
