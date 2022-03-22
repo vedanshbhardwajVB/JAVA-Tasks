@@ -11,6 +11,10 @@ public class ConstructorDemo {
 		l2.printDetails();
 		l3.printDetails();
 		l4.printDetails();
+		l2.ram=0;
+		l2.price=0;
+		l4.printDetails();
+		l2.printDetails();
 	}
 }
 
