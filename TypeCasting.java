@@ -31,6 +31,7 @@ String i = sc.nextLine();
 System.out.println("The primitive int value is "+ Integer.parseInt(i));
 
 System.out.println("Enter a Boolean string ");
+//checking what happens if user enters anything accept True and False, - > the bolean is assigned false
 String b = sc.nextLine();
 System.out.println("The Wrapper Boolean value is "+ Boolean.valueOf(b));
 
