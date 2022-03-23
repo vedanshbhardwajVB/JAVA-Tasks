@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 class CustomException extends Exception {
 	public CustomException (String s){
@@ -44,7 +45,8 @@ public int pop() throws CustomException{
 	return entry;
 }
  
-public int peek() {
+public int peek() throws CustomException {
+    if(top == -1) throw new CustomException ("Stack is emtpy, NOTHING to peak here !");
     return stackArray[top];
 }
  
@@ -64,6 +66,7 @@ private void increaseStackCapacity(){
     }
     this.stackArray = newStack;
     this.stackSize = this.stackSize*2;
+	System.out.println("The stack size is now "+stackSize);
 }
  
 private void decreaseStackCapacity(){	         
@@ -73,6 +76,15 @@ private void decreaseStackCapacity(){
     }
     this.stackArray = newStack;
     this.stackSize = this.stackSize/2;
+		System.out.println("The stack size is now "+stackSize);
+}
+
+public String toString () {
+	StringBuilder sb = new StringBuilder();
+	for(int i : stackArray) {
+		sb.append("->"+i);
+	}
+	return sb.toString();
 }
 public static void main(String args[]){
 	
@@ -83,24 +95,39 @@ public static void main(String args[]){
 	try {
 	boolean cont=true;
 	while(cont){
-	System.out.println("Press 1 for PUSHING, 2 for POPPING");
+	System.out.println("Press 1 for PUSHING \n Press 2 for POPPING \n Press 3 for PEAKING TOP \n Press 4 for SEEING THE STACK contents");
 	int choice = sc.nextInt();
-	if(choice == 1){
-		System.out.println("How many elements do you want to push in the stack ?");
-		int count = sc.nextInt();
-		System.out.println("Start entering, one number in a line....");
-		for(int i=0; i<count ;i++){
-			stack.push(sc.nextInt());
+
+	switch (choice) {
+		case 1 :
+			{System.out.println("How many elements do you want to push in the stack ?");
+			int count = sc.nextInt();
+			System.out.println("Start entering, one number in a line....");
+			for(int i=0; i<count ;i++){
+				stack.push(sc.nextInt());
 			}
-		}
-	else {
-		System.out.println("How many elements do you want to pop from the stack ?");
-		int count = sc.nextInt();
-		while (count >0){
-			stack.pop();
-			count--;
+		break;}
+
+		case 2 :
+			{System.out.println("How many elements do you want to pop from the stack ?");
+			int count = sc.nextInt();
+			while (count >0){
+				stack.pop();
+				count--;
 			}
-		}
+		break;}
+
+		case 3 :
+			System.out.println("The element at the TOP of the stack is "+stack.peek());
+		break;
+
+		case 4 :
+			System.out.println ("The stack contents are "+stack);
+		break;
+
+		default :
+			System.out.println("You made a wrong choice ");
+	}
 	
 	System.out.println("Want to continue ?? 1 for YES, 2 for NO ");
 	cont=sc.nextInt()==1? true: false;
