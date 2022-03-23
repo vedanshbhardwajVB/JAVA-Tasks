@@ -26,5 +26,15 @@ public class BoxUnbox {
 
 	Float fl = f;
 	System.out.println("Autoboxed float value is "+ f);
+
+	System.out.println("Now AutoUnboxing -----------");
+	int m=x;
+	System.out.println("AutoUnboxed int value is "+ m);
+	
+	char n=ch;
+	System.out.println("AutoUnboxed char value is "+ n);
+
+	float o=fl;
+	System.out.println("AutoUnboxed float value is "+ f);
 	}
 }
